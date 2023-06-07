@@ -1,20 +1,26 @@
 <!DOCTYPE html>
-<html>
+<html <?php language_attributes(); ?>>
     <head>
+        <!-- ensures charset according to CMS: -->
+        <meta charset="<?php bloginfo('charset') ?> />
+        <!-- ensures responsivity: -->
+        <meta name="viewport" content="width=device-width, initial-scale=1" /> 
+        <!-- load page's head: -->
         <?php wp_head(); ?>
     </head>
-    <body>
+    <!-- generates classes for the body tag, dynamically (depending on which page is being rendered) -->
+    <body <?php body_class(); ?>>
     <header class="site-header">
       <div class="container">
         <h1 class="school-logo-text float-left">
-          <a href="#"><strong>Fictional</strong> University</a>
+          <a href="<?php echo site_url('/'); ?>"><strong>Fictional</strong> University</a>
         </h1>
         <span class="js-search-trigger site-header__search-trigger"><i class="fa fa-search" aria-hidden="true"></i></span>
         <i class="site-header__menu-trigger fa fa-bars" aria-hidden="true"></i>
         <div class="site-header__menu group">
           <nav class="main-navigation">
             <ul>
-              <li><a href="#">About Us</a></li>
+              <li><a href="<?php echo site_url('/about-us'); ?>">About Us</a></li>
               <li><a href="#">Programs</a></li>
               <li><a href="#">Events</a></li>
               <li><a href="#">Campuses</a></li>

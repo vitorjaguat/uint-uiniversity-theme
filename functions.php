@@ -16,3 +16,9 @@ function university_files() {
 }
 
 add_action('wp_enqueue_scripts', 'university_files'); // run university_files function before loading the head in html
+
+function university_features() {
+    add_theme_support('title-tag'); //enables dynamic titles on the page's tab
+}
+
+add_action('after_setup_theme', 'university_features');
