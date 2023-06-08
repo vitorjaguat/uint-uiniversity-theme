@@ -18,6 +18,9 @@ function university_files() {
 add_action('wp_enqueue_scripts', 'university_files'); // run university_files function before loading the head in html
 
 function university_features() {
+    register_nav_menu('headerMenuLocation', 'Header Menu Location'); // register menu location so that in the CMS the user can create and edit menus (see index.php, the exact location is set there)
+    register_nav_menu('footerLocationOne', 'Footer Location 1'); 
+    register_nav_menu('footerLocationTwo', 'Footer Location 2'); 
     add_theme_support('title-tag'); //enables dynamic titles on the page's tab
 }
 
