@@ -43,6 +43,6 @@ function university_adjust_queries($query)
     }
 }
 
-add_action('pre_get_posts', 'university_adjust_queries');
+add_action('pre_get_posts', 'university_adjust_queries'); //sort events in ascending order of their event_date field + not show past events
 
 //see uint-university-theme/mu-plugins for other functions, eg university-post-types.php that defines custom post types (they are there so that the user can change the theme and keep having access to them in the CMS)
