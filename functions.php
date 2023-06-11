@@ -21,6 +21,7 @@ function university_features()
     register_nav_menu('footerLocationOne', 'Footer Location 1');
     register_nav_menu('footerLocationTwo', 'Footer Location 2');
     add_theme_support('title-tag'); //enables dynamic titles on the page's tab
+    add_theme_support('post-thumbnails'); //enables featured image for posts -> this innitially will only work for blog posts -> to enable it for other post-types, add 'thumbnail' as as item of 'supports' array in register_post_type in mu-plugins/university-post-types
 }
 
 add_action('after_setup_theme', 'university_features');
