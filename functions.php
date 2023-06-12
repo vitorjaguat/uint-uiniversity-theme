@@ -1,5 +1,28 @@
 <?php
 
+function pageBanner() {
+    //php logic
+    ?>
+
+    <div class="page-banner">
+        <div class="page-banner__bg-image" style="background-image: url(<?php 
+        $pageBannerImage = (get_field('page_banner_background_image')) ? get_field('page_banner_background_image') : get_theme_file_uri('images/ocean.jpg');
+        echo (get_field('page_banner_background_image')) ? $pageBannerImage['sizes']['pageBanner'] : $pageBannerImage;
+        ?>)"></div>
+        <div class="page-banner__content container container--narrow">
+            <!-- <?php print_r($pageBannerImage) ?> -->
+            <h1 class="page-banner__title"><?php the_title(); ?></h1>
+            <div class="page-banner__intro">
+                <p><?php
+                $bannerSubtitle = (get_field('page_banner_subtitle')) ? get_field('page_banner_subtitle') : 'Replace this with a custom subtitle';
+                echo $bannerSubtitle; ?></p>
+            </div>
+        </div>
+    </div>
+
+    <?php
+}
+
 // function university_files() {
 //     wp_enqueue_style('university_main_styles', get_stylesheet_uri()); // adding styles from style.css
 
@@ -22,6 +45,10 @@ function university_features()
     register_nav_menu('footerLocationTwo', 'Footer Location 2');
     add_theme_support('title-tag'); //enables dynamic titles on the page's tab
     add_theme_support('post-thumbnails'); //enables featured image for posts -> this innitially will only work for blog posts -> to enable it for other post-types, add 'thumbnail' as as item of 'supports' array in register_post_type in mu-plugins/university-post-types
+    add_image_size('professorLandscape', 400, 260, true);
+    add_image_size('professorPortrait', 480, 650, true);
+    add_image_size('pageBanner', 1500, 350, true);
+
 }
 
 add_action('after_setup_theme', 'university_features');
@@ -53,3 +80,4 @@ function university_adjust_queries($query)
 add_action('pre_get_posts', 'university_adjust_queries'); //sort events in ascending order of their event_date field + not show past events
 
 //see uint-university-theme/mu-plugins for other functions, eg university-post-types.php that defines custom post types (they are there so that the user can change the theme and keep having access to them in the CMS)
+
