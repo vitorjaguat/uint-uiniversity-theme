@@ -1,21 +1,36 @@
 <?php
 
-function pageBanner() {
-    //php logic
+function pageBanner($args = NULL) { //$args argument is OPTIONAL instead of required
+    
+    //php code for this function
+    if (!isset($args['title'])) {
+        $args['title'] = get_the_title();
+    }
+
+    if (!isset($args['subtitle'])) {
+        $args['subtitle'] = get_field('page_banner_subtitle');
+    } 
+
+    if (!isset($args['photo'])) {
+        if (get_field('page_banner_background_image') AND !is_archive() AND !is_home()) {
+            $args['photo'] = get_field('page_banner_background_image')['sizes']['pageBanner'];
+        } else {
+            $args['photo'] = get_theme_file_uri('/images/ocean.jpg');
+        }
+    }
+
     ?>
 
     <div class="page-banner">
         <div class="page-banner__bg-image" style="background-image: url(<?php 
-        $pageBannerImage = (get_field('page_banner_background_image')) ? get_field('page_banner_background_image') : get_theme_file_uri('images/ocean.jpg');
-        echo (get_field('page_banner_background_image')) ? $pageBannerImage['sizes']['pageBanner'] : $pageBannerImage;
-        ?>)"></div>
+        echo $args['photo'];
+        ?>"></div>
         <div class="page-banner__content container container--narrow">
             <!-- <?php print_r($pageBannerImage) ?> -->
-            <h1 class="page-banner__title"><?php the_title(); ?></h1>
+            <h1 class="page-banner__title"><?php echo $args['title'] ?></h1>
             <div class="page-banner__intro">
                 <p><?php
-                $bannerSubtitle = (get_field('page_banner_subtitle')) ? get_field('page_banner_subtitle') : 'Replace this with a custom subtitle';
-                echo $bannerSubtitle; ?></p>
+                echo $args['subtitle']; ?></p>
             </div>
         </div>
     </div>

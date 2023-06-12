@@ -2,25 +2,13 @@
 
 <?php
 get_header();
+pageBanner();
 
 while (have_posts()) {
-    the_post(); ?>
+    the_post();
+    ?>
 
-    <div class="page-banner">
-        <div class="page-banner__bg-image" style="background-image: url(<?php 
-        $pageBannerImage = (get_field('page_banner_background_image')) ? get_field('page_banner_background_image') : get_theme_file_uri('images/ocean.jpg');
-        echo (get_field('page_banner_background_image')) ? $pageBannerImage['sizes']['pageBanner'] : $pageBannerImage;
-        ?>)"></div>
-        <div class="page-banner__content container container--narrow">
-            <!-- <?php print_r($pageBannerImage) ?> -->
-            <h1 class="page-banner__title"><?php the_title(); ?></h1>
-            <div class="page-banner__intro">
-                <p><?php
-                $bannerSubtitle = (get_field('page_banner_subtitle')) ? get_field('page_banner_subtitle') : 'Replace this with a custom subtitle';
-                echo $bannerSubtitle; ?></p>
-            </div>
-        </div>
-    </div>
+    
 
     <div class="container container--narrow page-section">
     <div class="generic-content">
