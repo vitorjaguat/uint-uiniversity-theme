@@ -21,6 +21,7 @@ while (have_posts()) {
 
         <?php
 
+        //Related programs:
         $relatedPrograms = get_field('related_programs');
 
         if ($relatedPrograms) {
@@ -31,7 +32,24 @@ while (have_posts()) {
                 <li><a href="<?php echo get_the_permalink($program) ?>"><?php echo get_the_title($program); ?></a></li>
         <?php }
             echo '</ul>';
+
+            wp_reset_postdata();
         }
+
+        //Related campus:
+        $relatedCampus = get_field('related_campus');
+
+        if ($relatedCampus) {
+            echo '<hr class="section-break">';
+            echo '<h2 class="headline headline--medium">Campus</h2>';
+            echo '<ul class="link-list min-list">';
+            foreach ($relatedCampus as $campus) { ?>
+                <li><a href="<?php echo get_the_permalink($campus) ?>"><?php echo get_the_title($campus); ?></a></li>
+        <?php }
+            echo '</ul>';
+        }
+        wp_reset_postdata();
+
 
         ?>
 
