@@ -51,8 +51,12 @@ function university_files()
     wp_enqueue_style('university_main_styles', get_theme_file_uri('/build/style-index.css')); // adding styles from /build/style-index.css
     wp_enqueue_style('university_extra_styles', get_theme_file_uri('/build/index.css')); // adding styles from /build/style-index.css
     
-
-
+    wp_localize_script('main-university-js', 'universityData', array(
+        'root_url' => get_site_url()
+    ));
+        //main-university-js: it is the js script where we want to output this information, so that it can be used (in this case, it is the main index.js that will live inside of the build folder)
+        //universityData definition:  the name of the variable to be output
+        // the 3rd argument is the data to be output in main-university-js; in this case, what we need is the actual site url
 }
 
 add_action('wp_enqueue_scripts', 'university_files'); // run university_files function before loading the head in html

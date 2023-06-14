@@ -3,6 +3,7 @@ import $ from 'jquery';
 class Search {
   // 1. describe and create/initiate our object
   constructor() {
+    this.addSearchHTML();
     this.openButton = $('.js-search-trigger');
     this.closeButton = $('.search-overlay__close');
     this.searchOverlay = $('.search-overlay');
@@ -44,7 +45,9 @@ class Search {
 
   getResults() {
     $.getJSON(
-      'http://uint-university.local/wp-json/wp/v2/posts?search=' +
+      //see functions.php for universityData definition (it outputs the actual root url for our website, dynamically, so that we can use these theme in production)
+      universityData.root_url +
+        '/wp-json/wp/v2/posts?search=' +
         this.searchField.val(),
       (posts) => {
         this.resultsDiv.html(`
@@ -66,6 +69,7 @@ class Search {
                   .join('')}
             ${posts.length ? '</ul>' : ''}
             `);
+        this.isSpinnerVisible = false;
       }
     );
   }
@@ -95,6 +99,24 @@ class Search {
       this.closeOverlay();
     }
     // console.log(key);
+  }
+
+  addSearchHTML() {
+    $('body').append(`
+    <div class="search-overlay">
+    <div class="search-overlay__top">
+      <div class="container">
+      <i class="fa fa-search search-overlay__icon" aria-hidden="true"></i>
+        <input autocomplete="off" type="text" placeholder="What are you looking for?" id="search-term" class="search-term">
+      <i class="fa fa-window-close search-overlay__close" aria-hidden="true"></i>
+
+      </div>
+    </div>
+    <div class="container">
+      <div id="search-overlay__results"></div>
+    </div>
+  </div>
+    `);
   }
 }
 

@@ -182,6 +182,7 @@ __webpack_require__.r(__webpack_exports__);
 class Search {
   // 1. describe and create/initiate our object
   constructor() {
+    this.addSearchHTML();
     this.openButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.js-search-trigger');
     this.closeButton = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.search-overlay__close');
     this.searchOverlay = jquery__WEBPACK_IMPORTED_MODULE_0___default()('.search-overlay');
@@ -220,7 +221,9 @@ class Search {
     this.previousValue = this.searchField.val();
   }
   getResults() {
-    jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON('http://uint-university.local/wp-json/wp/v2/posts?search=' + this.searchField.val(), posts => {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default().getJSON(
+    //see functions.php for universityData definition (it outputs the actual root url for our website, dynamically, so that we can use these theme in production)
+    universityData.root_url + '/wp-json/wp/v2/posts?search=' + this.searchField.val(), posts => {
       this.resultsDiv.html(`
             <h2 class="search-overlay__section-title">Search Results</h2>
             ${posts.length ? '<ul class="link-list min-list">' : '<p>No results.</p>'}
@@ -231,6 +234,7 @@ class Search {
                 `).join('')}
             ${posts.length ? '</ul>' : ''}
             `);
+      this.isSpinnerVisible = false;
     });
   }
   openOverlay() {
@@ -254,8 +258,25 @@ class Search {
     }
     // console.log(key);
   }
-}
 
+  addSearchHTML() {
+    jquery__WEBPACK_IMPORTED_MODULE_0___default()('body').append(`
+    <div class="search-overlay">
+    <div class="search-overlay__top">
+      <div class="container">
+      <i class="fa fa-search search-overlay__icon" aria-hidden="true"></i>
+        <input autocomplete="off" type="text" placeholder="What are you looking for?" id="search-term" class="search-term">
+      <i class="fa fa-window-close search-overlay__close" aria-hidden="true"></i>
+
+      </div>
+    </div>
+    <div class="container">
+      <div id="search-overlay__results"></div>
+    </div>
+  </div>
+    `);
+  }
+}
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (Search);
 
 /***/ }),
