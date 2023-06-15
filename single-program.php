@@ -15,7 +15,7 @@ while (have_posts()) {
             </p>
         </div>
         <div class="generic-content">
-            <?php the_content() ?>
+            <?php the_field('main_body_content') ?>
         </div>
 
         <?php }
@@ -86,7 +86,7 @@ while (have_posts()) {
             echo '<hr class="section-break">';
             echo '<h2 class="headline headline--medium">Upcoming ' . get_the_title() . ' Events</h2>';
             echo '<br>';
-            
+
             while ($homepageEvents->have_posts()) {
                 $homepageEvents->the_post(); 
                 get_template_part('template-parts/content-event');
