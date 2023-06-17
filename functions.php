@@ -12,9 +12,11 @@ function university_custom_rest() {
     ));
 }
 
-add_action('rest_api_init', 'university_custom_rest'); //the university_custom_rest customizes the fields that the rest api returns (see in Search.js)
+add_action('rest_api_init', 'university_custom_rest'); //the university_custom_rest customizes the fields that the rest api returns (see in /inc/search-route.php and Search.js)
+
 
 function pageBanner($args = NULL) { //$args argument is OPTIONAL instead of required
+    //'''evaluates which image to use in the page banner and inserts html code for it. this function is called in every page template boelow the header
     
     //php code for this function
     if (!isset($args['title'])) {
@@ -40,7 +42,6 @@ function pageBanner($args = NULL) { //$args argument is OPTIONAL instead of requ
         echo $args['photo'];
         ?>"></div>
         <div class="page-banner__content container container--narrow">
-            <!-- <?php print_r($pageBannerImage) ?> -->
             <h1 class="page-banner__title"><?php echo $args['title'] ?></h1>
             <div class="page-banner__intro">
                 <p><?php
