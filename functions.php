@@ -186,5 +186,17 @@ function makeNotePrivate($data, $postarr) {
     return $data;
 }
 
+//tell All In One Migration Plugin to ignore node_modules folder when building our export files, if we're using this plugin for that:
+// add_filter('ai1wm_exclude_content_from_export', 'ignoreCertainFiles');
+
+// function ignoreCertainFiles($exclude_filters) {
+//     $exclude_filters[] = 'themes/uint-university-theme/node_modules';
+//     return $exclude_filters;
+// }
+add_filter('ai1wm_exclude_themes_from_export', function ($exclude_filters) {
+    $exclude_filters[] = 'uint-university-theme/node_modules';
+    return $exclude_filters;
+  });
+
 //see uint-university-theme/mu-plugins for other functions, eg university-post-types.php that defines custom post types (they are there so that the user can change the theme and keep having access to them in the CMS)
 
